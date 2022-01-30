@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Infinity</title>
+</head>
+<body>
+	<div class="content-section">
+	<form method="POST">
+		{% csrf_token %}
+		<fieldset class="form-group">
+			<legend class="border-bottom mb-4">Update Password</legend>
+			<div id="div_id_username" class="form-group"> <label for="id_username" class=" requiredField">
+                UserID<span class="asteriskField">*</span> </label> <div class=""> <input type="number" name="userid" maxlength="150" autofocus class="textinput textInput form-control" required id="id_username"> </div> </div> <div id="div_id_email" class="form-group"> <label for="id_email" class=" requiredField">
+            <div class="form-group">
+                            <label for="id_userpass" class=" requiredField">New Password<span class="asteriskField">*</span> (Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters)</label>
+                            <div class=""><input type="password" name="pass" id="id_userpass" maxlength="150" autofocus class="textinput textInput form-control" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"/></div>
+                        </div>
+		</fieldset>
+		<div class="form-group">
+			<button class="btn btn-outline-info" type="submit">Submit</button>
+		</div>
+	</form>
+</div>	
+</body>
+</html>
