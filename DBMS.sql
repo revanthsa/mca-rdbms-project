@@ -146,8 +146,3 @@ BEGIN
     select CURRENT_TIMESTAMP INTO cur_time from dual;
     INSERT INTO sys_log VALUES(cur_user,cur_time,'Updated into Eventdetail');
 END;
-
-
-
-django-admin startproject
-django-admin startapp
