@@ -4,10 +4,11 @@ from django.contrib import messages
 #from .forms import UserRegisterForm
 from django.shortcuts import render,redirect
 # Create your views here.
+cx_Oracle.init_oracle_client(lib_dir=r'D:\oracle_client\instantclient_21_3')
 def home(request):
 	if request.method=='POST':
-		dsn_tns = cx_Oracle.makedsn('Revanth', '1521', service_name='orcl') 
-		conn = cx_Oracle.connect(user='c##rath', password='bigpika', dsn=dsn_tns) 
+		dsn_tns = cx_Oracle.makedsn('Revanth-MSI', '1521', service_name='xe') 
+		conn = cx_Oracle.connect(user='system', password='toor', dsn=dsn_tns) 
 		c = conn.cursor()
 		product={}
 		for i in ['names','rollno','department','gender','course','mobile','email']:
@@ -40,8 +41,8 @@ def home(request):
 
 def admin(request):
 	if request.method=='POST':
-		dsn_tns = cx_Oracle.makedsn('Revanth', '1521', service_name='orcl') 
-		conn = cx_Oracle.connect(user='c##rath', password='bigpika', dsn=dsn_tns) 
+		dsn_tns = cx_Oracle.makedsn('Revanth-MSI', '1521', service_name='xe') 
+		conn = cx_Oracle.connect(user='system', password='toor', dsn=dsn_tns) 
 		c = conn.cursor()
 		d={}
 		given=[]
@@ -59,8 +60,8 @@ def admin(request):
 			usr=i[1]
 			pas=i[2]
 		if d['userid']==given[0] and d['pass']==given[1]:
-			dsn_tns = cx_Oracle.makedsn('Revanth', '1521', service_name='orcl') 
-			conn = cx_Oracle.connect(user='c##rath', password='bigpika', dsn=dsn_tns) 
+			dsn_tns = cx_Oracle.makedsn('Revanth-MSI', '1521', service_name='xe') 
+			conn = cx_Oracle.connect(user='system', password='toor', dsn=dsn_tns) 
 			c = conn.cursor()
 			c.execute('select distinct(event) from eventdetail')
 			event=[]
@@ -76,8 +77,8 @@ def admin(request):
 				eventdet.append(i)
 			return render(request,'infinity/admin.html',{'event':event,'user':userdet,'eventdet':eventdet})
 		elif pas==d['pass']:
-			dsn_tns = cx_Oracle.makedsn('Revanth', '1521', service_name='orcl') 
-			conn = cx_Oracle.connect(user='c##rath', password='bigpika', dsn=dsn_tns) 
+			dsn_tns = cx_Oracle.makedsn('Revanth-MSI', '1521', service_name='xe') 
+			conn = cx_Oracle.connect(user='system', password='toor', dsn=dsn_tns) 
 			c = conn.cursor()
 			c.prepare('select * from eventdetail where userid=:urs')
 			c.execute(None,{'urs':usr})
@@ -95,8 +96,8 @@ def admin(request):
 def del_usr(request):
 	if request.method=='POST':
 		usrid=request.POST.get('userid')
-		dsn_tns = cx_Oracle.makedsn('Revanth', '1521', service_name='orcl') 
-		conn = cx_Oracle.connect(user='c##rath', password='bigpika', dsn=dsn_tns) 
+		dsn_tns = cx_Oracle.makedsn('Revanth-MSI', '1521', service_name='xe') 
+		conn = cx_Oracle.connect(user='system', password='toor', dsn=dsn_tns) 
 		c = conn.cursor()
 		c.prepare('delete from userdetail where userid=:usrid')
 		c.execute(None,{'usrid':usrid})
@@ -113,8 +114,8 @@ def del_usr(request):
 def del_eve(request):
 	if request.method=='POST':
 		ename=request.POST.get('eventname')
-		dsn_tns = cx_Oracle.makedsn('Revanth', '1521', service_name='orcl') 
-		conn = cx_Oracle.connect(user='c##rath', password='bigpika', dsn=dsn_tns) 
+		dsn_tns = cx_Oracle.makedsn('Revanth-MSI', '1521', service_name='xe') 
+		conn = cx_Oracle.connect(user='system', password='toor', dsn=dsn_tns) 
 		c = conn.cursor()
 		c.prepare('delete from eventdetail where event=:eventname')
 		c.execute(None,{'eventname':ename})
@@ -127,8 +128,8 @@ def del_eve(request):
 def find_usr(request):
 	if request.method=='POST':
 		usrid=request.POST.get('userid')
-		dsn_tns = cx_Oracle.makedsn('Revanth', '1521', service_name='orcl') 
-		conn = cx_Oracle.connect(user='c##rath', password='bigpika', dsn=dsn_tns) 
+		dsn_tns = cx_Oracle.makedsn('Revanth-MSI', '1521', service_name='xe') 
+		conn = cx_Oracle.connect(user='system', password='toor', dsn=dsn_tns) 
 		c = conn.cursor()
 		c.prepare('select * from login where userid=:usrid')
 		c.execute(None,{'usrid':usrid})
@@ -147,8 +148,8 @@ def find_usr(request):
 		return render(request,'infinity/find_usr.html')
 
 def syslog(request):
-	dsn_tns = cx_Oracle.makedsn('Revanth', '1521', service_name='orcl') 
-	conn = cx_Oracle.connect(user='c##rath', password='bigpika', dsn=dsn_tns) 
+	dsn_tns = cx_Oracle.makedsn('Revanth-MSI', '1521', service_name='xe') 
+	conn = cx_Oracle.connect(user='system', password='toor', dsn=dsn_tns) 
 	c = conn.cursor()
 	c.execute('select * from sys_log')
 	logdata=[]
@@ -160,8 +161,8 @@ def syslog(request):
 
 def updatedata(request):
 	if request.method=='POST':
-		dsn_tns = cx_Oracle.makedsn('Revanth', '1521', service_name='orcl') 
-		conn = cx_Oracle.connect(user='c##rath', password='bigpika', dsn=dsn_tns) 
+		dsn_tns = cx_Oracle.makedsn('Revanth-MSI', '1521', service_name='xe') 
+		conn = cx_Oracle.connect(user='system', password='toor', dsn=dsn_tns) 
 		c = conn.cursor()
 		product={}
 		for i in ['names','rollno','mobile','userid']:
@@ -195,8 +196,8 @@ def updatepass(request):
 	if request.method=='POST':
 		userid=request.POST.get('userid')
 		passw=request.POST.get('pass')
-		dsn_tns = cx_Oracle.makedsn('Revanth', '1521', service_name='orcl') 
-		conn = cx_Oracle.connect(user='c##rath', password='bigpika', dsn=dsn_tns) 
+		dsn_tns = cx_Oracle.makedsn('Revanth-MSI', '1521', service_name='xe') 
+		conn = cx_Oracle.connect(user='system', password='toor', dsn=dsn_tns) 
 		c = conn.cursor()
 		c.prepare('update userdetail set pass=:passw where userid=:userid')
 		c.execute(None,{'userid':userid,'passw':passw})
